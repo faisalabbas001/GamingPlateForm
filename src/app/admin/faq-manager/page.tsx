@@ -12,7 +12,7 @@ const Page = () => {
     if (session?.user.role === "user") {
       return router.push("/dashboard");
     }
-  }, [session]);
+  }, [session, router]);
 
   return (
     <>

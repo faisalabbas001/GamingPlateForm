@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { mongooseConnect } from "@/lib/dbConnect";
 import { Reward } from "@/model/Reward";
-import { User } from "@/model/User";
+// import { User } from "@/model/User";
 import mongoose from "mongoose";
 const getTotalRedeemedRewards = async (request: NextRequest) => {
   await mongooseConnect();

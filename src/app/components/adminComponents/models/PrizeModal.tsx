@@ -138,7 +138,7 @@ const PrizeModal: React.FC<PrizeModalProps> = ({
         freeProbability: selectedPrize.freeProbability,
       });
     }
-  }, [selectedPrize]);
+  }, [selectedPrize,formik]);
 
   return (
     <Dialog open={!!selectedPrize} onOpenChange={onClose}>

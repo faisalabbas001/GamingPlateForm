@@ -68,7 +68,7 @@ const getAllActivities = async (request: NextRequest) => {
   const limit = 10;
 
   try {
-    const query = { "user.role": "user" };
+    // const query = { "user.role": "user" };
 
     const totalActivities = await Activity.countDocuments().populate({
       path: "user",

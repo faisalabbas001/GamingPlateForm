@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { mongooseConnect } from "@/lib/dbConnect";
 import { User } from "@/model/User";
 import { RewardAdmin } from "@/model/RewardAdmin";
-import { Reward } from "@/model/Reward";
+// import { Reward } from "@/model/Reward";
 
 // Function to create a reward
 const createReward = async (request: NextRequest) => {
