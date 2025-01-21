@@ -326,7 +326,7 @@ const AdminUserContent = () => {
       level: selectedUser?.level || "",
       isActive: selectedUser?.isActive || false,
     });
-  }, [selectedUser]);
+  }, [selectedUser,setValues]);
 
   useEffect(() => {
     resetFormWithUserData();
@@ -337,7 +337,7 @@ const AdminUserContent = () => {
     if (isUserDialogOpen) {
       resetFormWithUserData();
     }
-  }, [selectedUser, isUserDialogOpen]);
+  }, [selectedUser, isUserDialogOpen,resetFormWithUserData]);
 
   const handlePrevPage = () => {
     if (activePage > 1) {

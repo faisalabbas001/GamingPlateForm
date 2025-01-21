@@ -123,15 +123,17 @@
     "@babel/helper-validator-identifier" "^7.25.7"
     to-fast-properties "^2.0.0"
 
-"@coinbase/wallet-sdk@^4.2.4", "@coinbase/wallet-sdk@4.0.3":
-  version "4.2.4"
-  resolved "https://registry.npmjs.org/@coinbase/wallet-sdk/-/wallet-sdk-4.2.4.tgz"
-  integrity sha512-wJ9QOXOhRdGermKAoJSr4JgGqZm/Um0m+ecywzEC9qSOu3TXuVcG3k0XXTXW11UBgjdoPRuf5kAwRX3T9BynFA==
+"@coinbase/wallet-sdk@4.0.3":
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/@coinbase/wallet-sdk/-/wallet-sdk-4.0.3.tgz"
+  integrity sha512-y/OGEjlvosikjfB+wk+4CVb9OxD1ob9cidEBLI5h8Hxaf/Qoob2XoVT1uvhtAzBx34KpGYSd+alKvh/GCRre4Q==
   dependencies:
-    "@noble/hashes" "^1.4.0"
+    buffer "^6.0.3"
     clsx "^1.2.1"
     eventemitter3 "^5.0.1"
-    preact "^10.24.2"
+    keccak "^3.0.3"
+    preact "^10.16.0"
+    sha.js "^2.4.11"
 
 "@coinbase/wallet-sdk@4.2.3":
   version "4.2.3"
@@ -1028,7 +1030,7 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@prisma/client@^6.2.1", "@prisma/client@>=2.26.0 || >=3":
+"@prisma/client@>=2.26.0 || >=3":
   version "6.2.1"
   resolved "https://registry.npmjs.org/@prisma/client/-/client-6.2.1.tgz"
   integrity sha512-msKY2iRLISN8t5X0Tj7hU0UWet1u0KuxSPHWuf3IRkB4J95mCvGpyQBfQ6ufcmvKNOMQSq90O2iUmJEN2e5fiA==
@@ -2195,7 +2197,7 @@
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.1.tgz"
   integrity sha512-fEzPV3hSkSMltkw152tJKNARhOupqbH96MZWyRjNaYZOMIzbrTeQDG+MTc6Mr2pgzFQzFxAfmhGDNP5QK++2ZA==
 
-"@wagmi/connectors@^5.7.4", "@wagmi/connectors@>=5.1":
+"@wagmi/connectors@>=5.1":
   version "5.7.4"
   resolved "https://registry.npmjs.org/@wagmi/connectors/-/connectors-5.7.4.tgz"
   integrity sha512-ubecKH0grfkfjTB17l1V6Gj4SCMTvCtie7Bq0oQdjqA3Z7zf+F/RAwZoehxkPnSyeK6pFotUlUSr82J3bNhPqA==
@@ -2219,7 +2221,7 @@
     "@walletconnect/ethereum-provider" "2.17.0"
     cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
 
-"@wagmi/core@^2.16.3", "@wagmi/core@>=2.13", "@wagmi/core@2.16.3":
+"@wagmi/core@>=2.13", "@wagmi/core@2.16.3":
   version "2.16.3"
   resolved "https://registry.npmjs.org/@wagmi/core/-/core-2.16.3.tgz"
   integrity sha512-SVovoWHaQ2AIkmGf+ucNijT6AHXcTMffFcLmcFF6++y21x+ge7Gkh3UoJiU91SDDv8n08eTQ9jbyia3GEgU5jQ==

@@ -210,7 +210,8 @@ console.log("cehcking for data")
       fetchReferralStats();
       fetchHistoryReferralStats();
     }
-  }, [userId, statusFilter, appliedRange, activePage]);
+  }, [userId, statusFilter, appliedRange, activePage, fetchReferralStats, fetchHistoryReferralStats]);
+  
 
 
   useEffect(() => {
