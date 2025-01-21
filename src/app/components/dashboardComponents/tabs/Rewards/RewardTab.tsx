@@ -147,7 +147,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
     if (userId) {
       fetchExchangeHistoryByUserId();
     }
-  }, [userId, statusFilter, activePage]);
+  }, [userId, statusFilter, activePage,fetchExchangeHistoryByUserId]);
 
   const openRedemptionOverlay = (reward: RewardsType) => {
     setSelectedReward(reward);

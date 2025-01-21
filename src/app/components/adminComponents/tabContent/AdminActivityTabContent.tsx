@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../ui/card";
 import { ScrollArea } from "../../ui/scroll-area";
 import {
@@ -37,7 +37,7 @@ const AdminActivityTabContent = () => {
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     try {
       setIsLoading(true);
       const res = await axios.get(`/api/activities?page=${activePage}`);
@@ -49,11 +49,11 @@ const AdminActivityTabContent = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [activePage]); 
 
   useEffect(() => {
     fetchActivities();
-  }, [activePage]);
+  }, [fetchActivities]);  
 
   const handleNextPage = () => {
     if (activePage < totalPages) {

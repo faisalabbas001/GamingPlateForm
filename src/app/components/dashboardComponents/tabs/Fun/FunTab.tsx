@@ -93,7 +93,7 @@ const FunTab: React.FC<FunTabProps> = ({
   activePage,
   setActivePage,
   totalPages,
-  setTotalPages,
+  // setTotalPages,
 }) => {
   const [showResultModal, setShowResultModal] = useState(false);
 

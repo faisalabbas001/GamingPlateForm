@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../../ui/card";
 import {
   BarChart,
@@ -127,7 +127,7 @@ const AdminDashboardContent = () => {
     }
   };
 
-  const filterChartData = (filterValue: string) => {
+  const filterChartData =  useCallback((filterValue: string) => {
     const now = new Date();
     let filtered = chartData;
 
@@ -172,7 +172,7 @@ const AdminDashboardContent = () => {
     }
 
     setFilteredData(filtered);
-  };
+  }, [chartData]);
 
   useEffect(() => {
     getAllUsers();

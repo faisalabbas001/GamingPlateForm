@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Badge } from "@/app/components/ui/badge";
-import { Button } from "@/app/components/ui/button";
+// import { Button } from "@/app/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
+  // CardFooter,
   CardHeader,
   CardTitle,
 } from "@/app/components/ui/card";
@@ -23,7 +23,7 @@ import { Bounce, toast } from "react-toastify";
 import axios from "axios";
 import moment from "moment";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/components/ui/select";
-import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import {  Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface ReferralTabType {
@@ -67,7 +67,7 @@ const ReferralTab: React.FC<ReferralTabType> = ({
       pendingReferralsCount: 0,
       activeReferralRate: 0,
     });
-  const [referralLinks, setReferralLinks] = useState<ReferralLink[]>([]);
+  // const [referralLinks, setReferralLinks] = useState<ReferralLink[]>([]);
 
 
 
@@ -110,19 +110,19 @@ const ReferralTab: React.FC<ReferralTabType> = ({
     fetchHistoryReferralStats();
   };
 
-  const handlePrevPage = () => {
-    if (activePage > 1) {
-      setActivePage(prev => prev - 1);
-      fetchHistoryReferralStats();
-    }
-  };
+  // const handlePrevPage = () => {
+  //   if (activePage > 1) {
+  //     setActivePage(prev => prev - 1);
+  //     fetchHistoryReferralStats();
+  //   }
+  // };
 
-  const handleNextPage = () => {
-    if (activePage < totalPages) {
-      setActivePage(prev => prev + 1);
-      fetchHistoryReferralStats(); 
-    }
-  };
+  // const handleNextPage = () => {
+  //   if (activePage < totalPages) {
+  //     setActivePage(prev => prev + 1);
+  //     fetchHistoryReferralStats(); 
+  //   }
+  // };
 
   const copyReferralLink = () => {
     navigator.clipboard.writeText(referralLink);
@@ -147,7 +147,7 @@ const ReferralTab: React.FC<ReferralTabType> = ({
     try {
       const response = await axios.get("/api/setting");
       // console.log(response.data.referralLevels);
-      setReferralLinks(response.data.referralLevels);
+      // setReferralLinks(response.data.referralLevels);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         console.error("Error fetching settings:", error.message);

@@ -14,9 +14,9 @@ import {
 import { Label } from "../components/ui/label";
 import { useTranslation } from "../context/TranslationProvider";
 import axios from "axios";
-interface QueryParams {
-    token?: string | string[];
-  }
+// interface QueryParams {
+//     token?: string | string[];
+//   }
   import { useSearchParams } from "next/navigation";
 export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false);

@@ -48,19 +48,19 @@ interface UserType {
   createdAt:number;
   redeemedRewards:number
 }
-interface RewardsType {
-  _id: string;
-  name: string;
-  cost: number;
-}
+// interface RewardsType {
+//   _id: string;
+//   name: string;
+//   cost: number;
+// }
 
 // Define the User type based on the structure of your `apiUsers` data
-type User = {
-  id: number; // Example property; adjust to match your data
-  name: string; // Example property
-  age: number; // Example property
-  // Add other properties as needed
-};
+// type User = {
+//   id: number; // Example property; adjust to match your data
+//   name: string; // Example property
+//   age: number; // Example property
+//   // Add other properties as needed
+// };
 
 
 type SortKey = keyof UserType | null;
@@ -72,7 +72,7 @@ type SortConfig = {
   
 const AdminUserContent = () => {
   const { t } = useTranslation();
-   const [apiRewards, setApiRewards] = useState<RewardsType[] | null>([]);
+  //  const [apiRewards, setApiRewards] = useState<RewardsType[] | null>([]);
   const [apiUsers, setApiUsers] = useState<UserType[] | null>([]);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -80,44 +80,44 @@ const AdminUserContent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-const [redeemedRewards, setRedeemedRewards] = useState(0);
+// const [redeemedRewards, setRedeemedRewards] = useState(0);
   const [loading, setLoading] = useState(false);
 
 
   console.log("check ing the user for the following",apiUsers)
   const userId="67505851a75d81414893d1bf"
-  const getAllRewards = async () => {
+  // const getAllRewards = async () => {
     
-    try {
-      const res = await axios.get("/api/reward");
-      setApiRewards(res.data);
-    } catch (error) {
-      console.error("error", error);
-    } finally {
+  //   try {
+  //     const res = await axios.get("/api/reward");
+  //     setApiRewards(res.data);
+  //   } catch (error) {
+  //     console.error("error", error);
+  //   } finally {
      
-    }
-  };
+  //   }
+  // };
 
- useEffect(() => {
-    getAllRewards();
-  }, []);
+//  useEffect(() => {
+//     getAllRewards();
+//   }, []);
 
  
-  useEffect(() => {
-    // Fetch total redeemed rewards
-    const fetchRedeemedRewards = async () => {
-      try {
-        const response = await axios.get(`/api/reward/total?userId=${userId}`);
-        setRedeemedRewards(response.data.totalRedeemed);
-        setLoading(false);
-      } catch (err) {
+  // useEffect(() => {
+  //   // Fetch total redeemed rewards
+  //   const fetchRedeemedRewards = async () => {
+  //     try {
+  //       const response = await axios.get(`/api/reward/total?userId=${userId}`);
+  //       setRedeemedRewards(response.data.totalRedeemed);
+  //       setLoading(false);
+  //     } catch (err) {
      
-        setLoading(false);
-      }
-    };
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchRedeemedRewards();
-  }, [userId]);
+  //   fetchRedeemedRewards();
+  // }, [userId]);
 
   console.log("checing th admin side for the totalrewards ")
 

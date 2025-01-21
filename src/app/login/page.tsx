@@ -15,7 +15,7 @@ import {
 } from "../components/ui/card";
 import { Label } from "../components/ui/label";
 import { FaGoogle } from "react-icons/fa";
-import { Gamepad2, Eye, EyeOff } from "lucide-react";
+import {  Eye, EyeOff } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
 import { useTranslation } from "../context/TranslationProvider";
 import { Bounce, toast } from "react-toastify";

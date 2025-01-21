@@ -125,7 +125,7 @@ const AdminRewardContent = () => {
     };
 
     fetchData();
-  }, [session, activePage]);
+  }, [session, activePage, getAllRewards, fetchAllRedeemedRewards]);
 
   const openAddRewardDialog = () => {
     setSelectedReward({ name: "", cost: 0, redeemed: 0 });
