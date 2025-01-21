@@ -79,7 +79,7 @@ const ReferralTab: React.FC<ReferralTabType> = ({
   const [appliedRange, setAppliedRange] = useState<{ min: string; max: string } | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [activePage, setActivePage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  // const [totalPages, setTotalPages] = useState(1);
 
  
   useEffect(() => {
@@ -142,7 +142,7 @@ const ReferralTab: React.FC<ReferralTabType> = ({
   const fetchSettings = async () => {
     try {
       const response = await axios.get("/api/setting");
-      // console.log(response.data.referralLevels);
+      console.log(response.data.referralLevels);
       // setReferralLinks(response.data.referralLevels);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -171,7 +171,7 @@ console.log("cehcking for data")
         console.error("An unexpected error occurred:", error);
       }
     }
-  }, [userId]);
+  }, [userId,router]);
 
 
 
@@ -190,7 +190,7 @@ console.log("cehcking for data")
       const response = await axios.get(`/api/referral/history?${params}`);
       // console.log("checking data fro the history23232",response)
       setReferralHistory(response.data.referralHistory);
-      setTotalPages(response.data.pagination.totalPages);
+      // setTotalPages(response.data.pagination.totalPages);
       setActivePage(response.data.pagination.currentPage);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -213,16 +213,13 @@ console.log("cehcking for data")
   }, [userId, statusFilter, appliedRange, activePage]);
 
 
-
-
   useEffect(() => {
     if (userId) {
       fetchReferralStats();
       fetchHistoryReferralStats();
     }
-  }, [userId, fetchReferralStats, fetchHistoryReferralStats]);
-
-
+  }, [userId, statusFilter, appliedRange, activePage, fetchReferralStats, fetchHistoryReferralStats]);
+  
 
   
   const renderTableContent = () => {

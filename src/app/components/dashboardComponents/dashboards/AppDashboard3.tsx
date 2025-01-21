@@ -197,7 +197,7 @@ const AppDashboard3 = () => {
         });
       }
     }
-  }, [session?.user?.id, FREE_SPIN_COOLDOWN, router]);
+  }, [session?.user?.id, router, FREE_SPIN_COOLDOWN]);
 
 
   useEffect(() => {
@@ -250,7 +250,7 @@ const AppDashboard3 = () => {
       getUserById();
       // fetchActivities();
     }
-  }, [session, FREE_SPIN_COOLDOWN]);
+  }, [session, FREE_SPIN_COOLDOWN,getUserById]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -355,7 +355,7 @@ const AppDashboard3 = () => {
     }
   };
 
-  const fireConfetti = () => {
+  const fireConfetti =  useCallback(() => {
     const wheelElement = wheelRef.current;
     if (wheelElement) {
       const rect = wheelElement.getBoundingClientRect();
@@ -372,8 +372,7 @@ const AppDashboard3 = () => {
         colors: ["#9F7AEA", "#805AD5", "#D53F8C", "#FBD38D", "#4FD1C5"],
       });
     }
-  };
-
+  },[])
   const spinWheel = async (isFree: boolean) => {
     if (isSpinning) {
       return;

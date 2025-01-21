@@ -12,19 +12,6 @@
   resolved "https://registry.npmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
-"@auth/core@0.34.2":
-  version "0.34.2"
-  resolved "https://registry.npmjs.org/@auth/core/-/core-0.34.2.tgz"
-  integrity sha512-KywHKRgLiF3l7PLyL73fjLSIBe1YNcA6sMeew4yMP6cfCWGXZrkkXd32AjRi1hlJ9nvovUBGZHvbn+LijO6ZeQ==
-  dependencies:
-    "@panva/hkdf" "^1.1.1"
-    "@types/cookie" "0.6.0"
-    cookie "0.6.0"
-    jose "^5.1.3"
-    oauth4webapi "^2.10.4"
-    preact "10.11.3"
-    preact-render-to-string "5.2.3"
-
 "@auth/core@0.37.2":
   version "0.37.2"
   resolved "https://registry.npmjs.org/@auth/core/-/core-0.37.2.tgz"
@@ -136,17 +123,15 @@
     "@babel/helper-validator-identifier" "^7.25.7"
     to-fast-properties "^2.0.0"
 
-"@coinbase/wallet-sdk@4.0.3":
-  version "4.0.3"
-  resolved "https://registry.npmjs.org/@coinbase/wallet-sdk/-/wallet-sdk-4.0.3.tgz"
-  integrity sha512-y/OGEjlvosikjfB+wk+4CVb9OxD1ob9cidEBLI5h8Hxaf/Qoob2XoVT1uvhtAzBx34KpGYSd+alKvh/GCRre4Q==
+"@coinbase/wallet-sdk@^4.2.4", "@coinbase/wallet-sdk@4.0.3":
+  version "4.2.4"
+  resolved "https://registry.npmjs.org/@coinbase/wallet-sdk/-/wallet-sdk-4.2.4.tgz"
+  integrity sha512-wJ9QOXOhRdGermKAoJSr4JgGqZm/Um0m+ecywzEC9qSOu3TXuVcG3k0XXTXW11UBgjdoPRuf5kAwRX3T9BynFA==
   dependencies:
-    buffer "^6.0.3"
+    "@noble/hashes" "^1.4.0"
     clsx "^1.2.1"
     eventemitter3 "^5.0.1"
-    keccak "^3.0.3"
-    preact "^10.16.0"
-    sha.js "^2.4.11"
+    preact "^10.24.2"
 
 "@coinbase/wallet-sdk@4.2.3":
   version "4.2.3"
@@ -158,7 +143,7 @@
     eventemitter3 "^5.0.1"
     preact "^10.24.2"
 
-"@ecies/ciphers@^0.2.1":
+"@ecies/ciphers@^0.2.2":
   version "0.2.2"
   resolved "https://registry.npmjs.org/@ecies/ciphers/-/ciphers-0.2.2.tgz"
   integrity sha512-ylfGR7PyTd+Rm2PqQowG08BCKA22QuX8NzrL+LxAAvazN10DMwdJ2fWwAzRj05FI/M8vNFGm3cv9Wq/GFWCBLg==
@@ -605,6 +590,13 @@
   dependencies:
     "@paulmillr/qr" "^0.2.1"
 
+"@metamask/sdk-install-modal-web@0.31.5":
+  version "0.31.5"
+  resolved "https://registry.npmjs.org/@metamask/sdk-install-modal-web/-/sdk-install-modal-web-0.31.5.tgz"
+  integrity sha512-ZfrVkPAabfH4AIxcTlxQN5oyyzzVXFTLZrm1/BJ+X632d9MiyAVHNtiqa9EZpZYkZGk2icmDVP+xCpvJmVOVpQ==
+  dependencies:
+    "@paulmillr/qr" "^0.2.1"
+
 "@metamask/sdk@0.31.1":
   version "0.31.1"
   resolved "https://registry.npmjs.org/@metamask/sdk/-/sdk-0.31.1.tgz"
@@ -615,6 +607,31 @@
     "@metamask/providers" "16.1.0"
     "@metamask/sdk-communication-layer" "0.31.0"
     "@metamask/sdk-install-modal-web" "0.31.1"
+    "@paulmillr/qr" "^0.2.1"
+    bowser "^2.9.0"
+    cross-fetch "^4.0.0"
+    debug "^4.3.4"
+    eciesjs "^0.4.11"
+    eth-rpc-errors "^4.0.3"
+    eventemitter2 "^6.4.9"
+    obj-multiplex "^1.0.0"
+    pump "^3.0.0"
+    readable-stream "^3.6.2"
+    socket.io-client "^4.5.1"
+    tslib "^2.6.0"
+    util "^0.12.4"
+    uuid "^8.3.2"
+
+"@metamask/sdk@0.31.5":
+  version "0.31.5"
+  resolved "https://registry.npmjs.org/@metamask/sdk/-/sdk-0.31.5.tgz"
+  integrity sha512-i7wteqO/fU2JWQrMZz+addHokYThHYznp4nYXviv+QysdxGVgAYvcW/PBA+wpeP3veX7QGfNqMPgSsZbBrASYw==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@metamask/onboarding" "^1.0.1"
+    "@metamask/providers" "16.1.0"
+    "@metamask/sdk-communication-layer" "0.31.0"
+    "@metamask/sdk-install-modal-web" "0.31.5"
     "@paulmillr/qr" "^0.2.1"
     bowser "^2.9.0"
     cross-fetch "^4.0.0"
@@ -865,9 +882,9 @@
   integrity sha512-lmYr6H3JyDNBJLzklGXLfbehU3ay78a+b6UmBGlHls4xhDXBNZfgb0aI67sflrX+cGBnv1LgmWzFlYrAYxS1Qw==
 
 "@noble/ciphers@^1.0.0":
-  version "1.1.3"
-  resolved "https://registry.npmjs.org/@noble/ciphers/-/ciphers-1.1.3.tgz"
-  integrity sha512-Ygv6WnWJHLLiW4fnNDC1z+i13bud+enXOFRBlpxI+NJliPWx5wdR+oWlTjLuBPTqjUjtHXtjkU6w3kuuH6upZA==
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/@noble/ciphers/-/ciphers-1.2.1.tgz"
+  integrity sha512-rONPWMC7PeExE077uLE4oqWrZ1IvAfz3oH9LibVAcVCopJiA9R62uavnbEzdkVmJYI6M6Zgkbeb07+tWjlq2XA==
 
 "@noble/curves@^1.4.0", "@noble/curves@^1.6.0", "@noble/curves@~1.7.0", "@noble/curves@1.7.0":
   version "1.7.0"
@@ -948,7 +965,7 @@
   resolved "https://registry.npmjs.org/@panva/asn1.js/-/asn1.js-1.0.0.tgz"
   integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
 
-"@panva/hkdf@^1.0.2", "@panva/hkdf@^1.1.1", "@panva/hkdf@^1.2.1":
+"@panva/hkdf@^1.0.2", "@panva/hkdf@^1.2.1":
   version "1.2.1"
   resolved "https://registry.npmjs.org/@panva/hkdf/-/hkdf-1.2.1.tgz"
   integrity sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw==
@@ -1011,10 +1028,10 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@prisma/client@>=2.26.0 || >=3":
-  version "5.21.1"
-  resolved "https://registry.npmjs.org/@prisma/client/-/client-5.21.1.tgz"
-  integrity sha512-3n+GgbAZYjaS/k0M03yQsQfR1APbr411r74foknnsGpmhNKBG49VuUkxIU6jORgvJPChoD4WC4PqoHImN1FP0w==
+"@prisma/client@^6.2.1", "@prisma/client@>=2.26.0 || >=3":
+  version "6.2.1"
+  resolved "https://registry.npmjs.org/@prisma/client/-/client-6.2.1.tgz"
+  integrity sha512-msKY2iRLISN8t5X0Tj7hU0UWet1u0KuxSPHWuf3IRkB4J95mCvGpyQBfQ6ufcmvKNOMQSq90O2iUmJEN2e5fiA==
 
 "@radix-ui/number@1.1.0":
   version "1.1.0"
@@ -1535,6 +1552,14 @@
     "@safe-global/safe-apps-sdk" "^9.1.0"
     events "^3.3.0"
 
+"@safe-global/safe-apps-provider@0.18.5":
+  version "0.18.5"
+  resolved "https://registry.npmjs.org/@safe-global/safe-apps-provider/-/safe-apps-provider-0.18.5.tgz"
+  integrity sha512-9v9wjBi3TwLsEJ3C2ujYoexp3pFJ0omDLH/GX91e2QB+uwCKTBYyhxFSrTQ9qzoyQd+bfsk4gjOGW87QcJhf7g==
+  dependencies:
+    "@safe-global/safe-apps-sdk" "^9.1.0"
+    events "^3.3.0"
+
 "@safe-global/safe-apps-sdk@^9.1.0", "@safe-global/safe-apps-sdk@9.1.0":
   version "9.1.0"
   resolved "https://registry.npmjs.org/@safe-global/safe-apps-sdk/-/safe-apps-sdk-9.1.0.tgz"
@@ -1544,9 +1569,9 @@
     viem "^2.1.1"
 
 "@safe-global/safe-gateway-typescript-sdk@^3.5.3":
-  version "3.22.4"
-  resolved "https://registry.npmjs.org/@safe-global/safe-gateway-typescript-sdk/-/safe-gateway-typescript-sdk-3.22.4.tgz"
-  integrity sha512-Z7Z8w3GEJdJ/paF+NK23VN4AwqWPadq0AeRYjYLjIBiPWpRB2UO/FKq7ONABEq0YFgNPklazIV4IExQU1gavXA==
+  version "3.22.7"
+  resolved "https://registry.npmjs.org/@safe-global/safe-gateway-typescript-sdk/-/safe-gateway-typescript-sdk-3.22.7.tgz"
+  integrity sha512-r1OML6y1oBL6E5ZADg9smzvVzOOgsTLfRXYuT/7fW1Eqg2nJKcALoLLfH6sJAcHvobHUZXcjxKPINDwNJq0N9g==
 
 "@scure/base@^1.1.3", "@scure/base@~1.2.1":
   version "1.2.1"
@@ -2170,7 +2195,19 @@
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.1.tgz"
   integrity sha512-fEzPV3hSkSMltkw152tJKNARhOupqbH96MZWyRjNaYZOMIzbrTeQDG+MTc6Mr2pgzFQzFxAfmhGDNP5QK++2ZA==
 
-"@wagmi/connectors@>=5.1", "@wagmi/connectors@5.5.3":
+"@wagmi/connectors@^5.7.4", "@wagmi/connectors@>=5.1":
+  version "5.7.4"
+  resolved "https://registry.npmjs.org/@wagmi/connectors/-/connectors-5.7.4.tgz"
+  integrity sha512-ubecKH0grfkfjTB17l1V6Gj4SCMTvCtie7Bq0oQdjqA3Z7zf+F/RAwZoehxkPnSyeK6pFotUlUSr82J3bNhPqA==
+  dependencies:
+    "@coinbase/wallet-sdk" "4.2.3"
+    "@metamask/sdk" "0.31.5"
+    "@safe-global/safe-apps-provider" "0.18.5"
+    "@safe-global/safe-apps-sdk" "9.1.0"
+    "@walletconnect/ethereum-provider" "2.17.0"
+    cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
+
+"@wagmi/connectors@5.5.3":
   version "5.5.3"
   resolved "https://registry.npmjs.org/@wagmi/connectors/-/connectors-5.5.3.tgz"
   integrity sha512-ADXcNuNtONh4PNzs5tWiYzl77P4UohXC7ozYecGvbn3Fkdk6x4tfsF9Wy3Ag5WcVbbp89MPpJ2+VK2ckBgtLAg==
@@ -2182,7 +2219,16 @@
     "@walletconnect/ethereum-provider" "2.17.0"
     cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
 
-"@wagmi/core@>=2.13", "@wagmi/core@2.15.2":
+"@wagmi/core@^2.16.3", "@wagmi/core@>=2.13", "@wagmi/core@2.16.3":
+  version "2.16.3"
+  resolved "https://registry.npmjs.org/@wagmi/core/-/core-2.16.3.tgz"
+  integrity sha512-SVovoWHaQ2AIkmGf+ucNijT6AHXcTMffFcLmcFF6++y21x+ge7Gkh3UoJiU91SDDv8n08eTQ9jbyia3GEgU5jQ==
+  dependencies:
+    eventemitter3 "5.0.1"
+    mipd "0.0.7"
+    zustand "5.0.0"
+
+"@wagmi/core@2.15.2":
   version "2.15.2"
   resolved "https://registry.npmjs.org/@wagmi/core/-/core-2.15.2.tgz"
   integrity sha512-4Bu1JA3HqtKvmBBsesvJ3HyqyLk69XYP0lwmG8jFqa5osfqn9iD8pvjsq5VHbIus+ZFM/UL6ydp9WWdtPNjH7w==
@@ -2885,9 +2931,9 @@ buffer@^6.0.3, buffer@6.0.3:
     ieee754 "^1.2.1"
 
 bufferutil@^4.0.1, bufferutil@^4.0.8:
-  version "4.0.8"
-  resolved "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.8.tgz"
-  integrity sha512-4T53u4PdgsXqKaIctwF8ifXlRTTmEPJ8iEPWFdGZvcf7sbwYo6FKFEX9eNNAnzFZ7EzJAQ3CJeOtCRA4rDp7Pw==
+  version "4.0.9"
+  resolved "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.9.tgz"
+  integrity sha512-WDtdLmJvAuNNPzByAYpRo2rF1Mmradw6gvWsQKf63476DDXmomT9zUiGypLcG4ibIM67vhAj8jJRdbmEws2Aqw==
   dependencies:
     node-gyp-build "^4.3.0"
 
@@ -3221,11 +3267,6 @@ cookie@^0.7.0, cookie@0.7.1:
   resolved "https://registry.npmjs.org/cookie/-/cookie-0.7.1.tgz"
   integrity sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==
 
-cookie@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmjs.org/cookie/-/cookie-0.6.0.tgz"
-  integrity sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==
-
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz"
@@ -3263,11 +3304,11 @@ cross-fetch@^3.1.4:
     node-fetch "^2.6.12"
 
 cross-fetch@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/cross-fetch/-/cross-fetch-4.0.0.tgz"
-  integrity sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==
+  version "4.1.0"
+  resolved "https://registry.npmjs.org/cross-fetch/-/cross-fetch-4.1.0.tgz"
+  integrity sha512-uKm5PU+MHTootlWEY+mZ4vvXoCn4fLQxT9dSc1sXVMSFkINTJVN8cAQROpwcKm8bJ/c7rgZVIBWzH5T78sNZZw==
   dependencies:
-    node-fetch "^2.6.12"
+    node-fetch "^2.7.0"
 
 cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.6"
@@ -3649,11 +3690,11 @@ ecdsa-sig-formatter@1.0.11:
     safe-buffer "^5.0.1"
 
 eciesjs@*, eciesjs@^0.4.11:
-  version "0.4.12"
-  resolved "https://registry.npmjs.org/eciesjs/-/eciesjs-0.4.12.tgz"
-  integrity sha512-DGejvMCihsRAmKRFQiL6KZDE34vWVd0gvXlykFq1aEzJy/rD65AVyAIUZKZOvgvaP9ATQRcHGEZV5DfgrgjA4w==
+  version "0.4.13"
+  resolved "https://registry.npmjs.org/eciesjs/-/eciesjs-0.4.13.tgz"
+  integrity sha512-zBdtR4K+wbj10bWPpIOF9DW+eFYQu8miU5ypunh0t4Bvt83ZPlEWgT5Dq/0G6uwEXumZKjfb5BZxYUZQ2Hzn/Q==
   dependencies:
-    "@ecies/ciphers" "^0.2.1"
+    "@ecies/ciphers" "^0.2.2"
     "@noble/ciphers" "^1.0.0"
     "@noble/curves" "^1.6.0"
     "@noble/hashes" "^1.5.0"
@@ -5143,7 +5184,7 @@ jose@^4.15.9:
   resolved "https://registry.npmjs.org/jose/-/jose-4.15.9.tgz"
   integrity sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==
 
-jose@^5.1.3, jose@^5.9.3:
+jose@^5.9.3:
   version "5.9.6"
   resolved "https://registry.npmjs.org/jose/-/jose-5.9.6.tgz"
   integrity sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ==
@@ -5835,7 +5876,7 @@ node-fetch-native@^1.6.4:
   resolved "https://registry.npmjs.org/node-fetch-native/-/node-fetch-native-1.6.4.tgz"
   integrity sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==
 
-node-fetch@^2.6.12, node-fetch@^2.6.7:
+node-fetch@^2.6.12, node-fetch@^2.6.7, node-fetch@^2.7.0:
   version "2.7.0"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
@@ -5890,11 +5931,6 @@ oauth@^0.9.15:
   version "0.9.15"
   resolved "https://registry.npmjs.org/oauth/-/oauth-0.9.15.tgz"
   integrity sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==
-
-oauth4webapi@^2.10.4:
-  version "2.17.0"
-  resolved "https://registry.npmjs.org/oauth4webapi/-/oauth4webapi-2.17.0.tgz"
-  integrity sha512-lbC0Z7uzAFNFyzEYRIC+pkSVvDHJTbEW+dYlSBAlCYDe6RxUkJ26bClhk8ocBZip1wfI9uKTe0fm4Ib4RHn6uQ==
 
 oauth4webapi@^3.0.0:
   version "3.1.2"

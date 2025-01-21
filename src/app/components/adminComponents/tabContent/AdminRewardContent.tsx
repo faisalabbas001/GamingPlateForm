@@ -239,19 +239,19 @@ const AdminRewardContent = () => {
     },
   });
 
-  const resetFormWithUserData = () => {
+  const resetFormWithUserData = useCallback(() => {
     setValues({
       name: selectedReward?.name || "",
       cost: selectedReward?.cost || 0,
       redeemed: selectedReward?.claimed || 0,
     });
-  };
+  }, [selectedReward,setValues]);
 
   useEffect(() => {
     if (isRewardDialogOpen) {
       resetFormWithUserData();
     }
-  }, [selectedReward, isRewardDialogOpen]);
+  }, [selectedReward, isRewardDialogOpen,resetFormWithUserData]);
 
   const handleRewardDelete = async (rewardId: string) => {
     Swal.fire({

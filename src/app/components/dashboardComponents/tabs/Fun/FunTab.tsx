@@ -110,7 +110,7 @@ const FunTab: React.FC<FunTabProps> = ({
         fireConfetti();
       }
     }
-  }, [result]);
+  }, [result,fireConfetti]);
 
   const handleNextPage = () => {
     setActivePage(activePage + 1);

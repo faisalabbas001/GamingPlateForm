@@ -13,7 +13,7 @@ import {
 } from "../components/ui/card";
 import { Label } from "../components/ui/label";
 import { useTranslation } from "../context/TranslationProvider";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");

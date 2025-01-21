@@ -121,7 +121,7 @@ const AdminUserContent = () => {
 
   console.log("checing th admin side for the totalrewards ")
 
-  const getAllUsers = async () => {
+  const getAllUsers = useCallback(async () => {
     try {
       const response = await axios.get(`/api/users?page=${activePage}`);
       // console.log("checking the data",response)
@@ -133,7 +133,7 @@ const AdminUserContent = () => {
     } catch (error) {
       console.error("error", error);
     }
-  };
+  }, [activePage]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -143,7 +143,7 @@ const AdminUserContent = () => {
     };
 
     fetchUsers();
-  }, [activePage]);
+  }, [activePage,getAllUsers]);
 
 
   
@@ -316,7 +316,7 @@ const AdminUserContent = () => {
     },
   });
 
-  const resetFormWithUserData = () => {
+  const resetFormWithUserData = useCallback(() => {
     setValues({
       _id: selectedUser?._id || "",
       username: selectedUser?.username || "",
@@ -326,8 +326,13 @@ const AdminUserContent = () => {
       level: selectedUser?.level || "",
       isActive: selectedUser?.isActive || false,
     });
-  };
+  }, [selectedUser]);
 
+  useEffect(() => {
+    resetFormWithUserData();
+  }, [resetFormWithUserData]);
+
+  
   useEffect(() => {
     if (isUserDialogOpen) {
       resetFormWithUserData();
