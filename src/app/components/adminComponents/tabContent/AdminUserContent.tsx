@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useCallback} from "react";
 import { Card, CardContent, CardTitle, CardHeader, CardFooter } from "../../ui/card";
 import { Input } from "../../ui/input";
 import { ScrollArea } from "../../ui/scroll-area";
@@ -81,11 +81,11 @@ const AdminUserContent = () => {
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 // const [redeemedRewards, setRedeemedRewards] = useState(0);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
 
   console.log("check ing the user for the following",apiUsers)
-  const userId="67505851a75d81414893d1bf"
+  // const userId="67505851a75d81414893d1bf"
   // const getAllRewards = async () => {
     
   //   try {
@@ -121,7 +121,34 @@ const AdminUserContent = () => {
 
   console.log("checing th admin side for the totalrewards ")
 
-  const handleSearch = async (searchTerm: string) => {
+  const getAllUsers = async () => {
+    try {
+      const response = await axios.get(`/api/users?page=${activePage}`);
+      // console.log("checking the data",response)
+      if (response) {
+        setApiUsers(response.data.users);
+        setTotalPages(response.data.pagination.totalPages);
+        setActivePage(response.data.pagination.currentPage);
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setIsLoading(true);
+      await getAllUsers();
+      setIsLoading(false);
+    };
+
+    fetchUsers();
+  }, [activePage]);
+
+
+  
+
+  const handleSearch = useCallback(async (searchTerm: string) => {
     if (searchTerm) {
       try {
         const response = await axios.get(`/api/users?query=${searchTerm}&page=${activePage}`);
@@ -134,11 +161,11 @@ const AdminUserContent = () => {
     } else {
       getAllUsers();
     }
-  };
+  }, [activePage, getAllUsers]);
 
   useEffect(() => {
     handleSearch(searchTerm);
-  }, [searchTerm, activePage]);
+  }, [searchTerm, activePage,handleSearch]);
 
   const handleUserToggleActive = async (userId: string, active: boolean) => {
     try {
@@ -182,33 +209,6 @@ const AdminUserContent = () => {
       console.error("error", error);
     }
   };
-
-  const getAllUsers = async () => {
-    try {
-      const response = await axios.get(`/api/users?page=${activePage}`);
-      // console.log("checking the data",response)
-      if (response) {
-        setApiUsers(response.data.users);
-        setTotalPages(response.data.pagination.totalPages);
-        setActivePage(response.data.pagination.currentPage);
-      }
-    } catch (error) {
-      console.error("error", error);
-    }
-  };
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setIsLoading(true);
-      await getAllUsers();
-      setIsLoading(false);
-    };
-
-    fetchUsers();
-  }, [activePage]);
-
-
-  
 
 
   const handleUserDelete = async (userId: string) => {

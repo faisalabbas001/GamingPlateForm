@@ -1,8 +1,6 @@
-// app/register/page.tsx
 "use client";
 
 import { useState } from "react";
-// import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -15,7 +13,7 @@ import {
 } from "../components/ui/card";
 import { Label } from "../components/ui/label";
 import { useTranslation } from "../context/TranslationProvider";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -24,22 +22,23 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
 
   const { t } = useTranslation();
-  // const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
     setError("");
-    
 
     try {
       const response = await axios.post("/api/forget-password", { email });
       setMessage(response.data.message);
-      setEmail("")
-   
-    } catch (err: any) {
-      setError(err.response?.data?.error || "An unexpected error occurred.");
+      setEmail("");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.error || "An unexpected error occurred.");
+      } else {
+        setError("An unexpected error occurred.");
+      }
     } finally {
       setLoading(false);
     }
@@ -76,7 +75,9 @@ export default function RegisterPage() {
             <Button
               type="submit"
               disabled={loading}
-              className={`w-full font-bold rounded-[4px] bg-[#9333EA] hover:bg-purple-800 ${loading && "opacity-50 cursor-not-allowed"}`}
+              className={`w-full font-bold rounded-[4px] bg-[#9333EA] hover:bg-purple-800 ${
+                loading && "opacity-50 cursor-not-allowed"
+              }`}
             >
               {loading ? t("Sending...") : t("Send Recovery Instructions")}
             </Button>

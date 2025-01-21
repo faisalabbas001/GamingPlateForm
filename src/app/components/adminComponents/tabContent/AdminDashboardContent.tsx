@@ -180,7 +180,7 @@ const AdminDashboardContent = () => {
 
   useEffect(() => {
     filterChartData(filter);
-  }, [filter, chartData]);
+  }, [filter, chartData,filterChartData]);
 
   return (
     <>

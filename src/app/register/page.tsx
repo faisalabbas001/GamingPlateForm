@@ -42,7 +42,7 @@ export default function RegisterPage() {
     if (session) {
       return router.push("/");
     }
-  }, [session]);
+  }, [session,router]);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();

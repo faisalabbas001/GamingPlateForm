@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Badge } from "@/app/components/ui/badge";
 // import { Button } from "@/app/components/ui/button";
 import {
@@ -32,11 +32,7 @@ interface ReferralTabType {
   userId: string;
 }
 
-interface ReferralLink {
-  _id: string;
-  name: string;
-  percentage: number;
-}
+
 interface UserReferralStatType {
   totalReferrals: number;
   earnedCredits: number;
@@ -160,7 +156,7 @@ const ReferralTab: React.FC<ReferralTabType> = ({
     fetchSettings();
   }, []);
 console.log("cehcking for data")
-  const fetchReferralStats = async () => {
+  const fetchReferralStats = useCallback(async () => {
     try {
       const response = await axios.get(`/api/referral?userId=${userId}`);
       console.log("ressssssss::::", response.data);
@@ -175,9 +171,11 @@ console.log("cehcking for data")
         console.error("An unexpected error occurred:", error);
       }
     }
-  };
+  }, [userId]);
 
-  const fetchHistoryReferralStats = async () => {
+
+
+  const fetchHistoryReferralStats = useCallback(async  () => {
     try {
       setIsLoading(true);
       const params = new URLSearchParams({
@@ -206,7 +204,7 @@ console.log("cehcking for data")
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [userId, statusFilter, activePage, appliedRange, router]);
   useEffect(() => {
     if (userId) {
       fetchReferralStats();
@@ -214,6 +212,19 @@ console.log("cehcking for data")
     }
   }, [userId, statusFilter, appliedRange, activePage]);
 
+
+
+
+  useEffect(() => {
+    if (userId) {
+      fetchReferralStats();
+      fetchHistoryReferralStats();
+    }
+  }, [userId, fetchReferralStats, fetchHistoryReferralStats]);
+
+
+
+  
   const renderTableContent = () => {
     if (isLoading) {
       return (

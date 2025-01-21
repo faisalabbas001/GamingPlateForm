@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Card, CardContent, CardTitle, CardHeader, CardFooter } from "../../ui/card";
 import { Input } from "../../ui/input";
 import { ScrollArea } from "../../ui/scroll-area";
@@ -73,16 +73,16 @@ const AdminRewardContent = () => {
     RedemptionsType[] | null
   >([]);
 
-  const getAllRewards = async () => {
+  const getAllRewards = useCallback(async () => {
     try {
       const res = await axios.get("/api/reward");
       setApiRewards(res.data);
     } catch (error) {
       console.error("error", error);
     }
-  };
+  }, []);
 
-  const fetchAllRedeemedRewards = async () => {
+  const fetchAllRedeemedRewards =  useCallback(async () => {
     try {
       const response = await axios.get(`/api/exchange-history?page=${activePage}`);
       if (response) {
@@ -93,7 +93,7 @@ const AdminRewardContent = () => {
     } catch (error) {
       console.error("Error fetching all redeemed rewards.", error);
     }
-  };
+  }, [activePage]);
 
   const handleNextPage = () => {
     if (activePage < totalPages) {

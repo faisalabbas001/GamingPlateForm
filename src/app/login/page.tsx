@@ -34,7 +34,7 @@ export default function LoginPage() {
     if (session) {
       return router.push("/");
     }
-  }, [session]);
+  }, [session,router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

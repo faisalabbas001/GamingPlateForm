@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/components/ui/table";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -104,7 +104,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
 
   // console.log("checkung the reward data",apiRewards);
   // console.log("checkung the reward history data",redemptionHistory)
-  const fetchExchangeHistoryByUserId = async () => {
+  const fetchExchangeHistoryByUserId = useCallback(async () => {
     setExchangeLoading(true);
     try {
       const response = await axios.get(
@@ -125,7 +125,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
     } finally {
       setExchangeLoading(false);
     }
-  };
+  }, [userId, statusFilter, activePage, router]);
 
   const handlePrevPage = () => {
     if (activePage > 1) {

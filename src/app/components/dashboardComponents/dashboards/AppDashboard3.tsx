@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect,useCallback } from "react";
 import { useRouter } from "next/navigation";
 import {
   Tabs,
@@ -137,7 +137,7 @@ const AppDashboard3 = () => {
     fetchSettings();
   }, []);
 
-  const getUserById = async () => {
+  const getUserById =useCallback( async () => {
     try {
       const res = await axios.get(`/api/users?id=${session?.user?.id}`);
       // console.log("res user data", res.data);
@@ -197,12 +197,23 @@ const AppDashboard3 = () => {
         });
       }
     }
-  };
+  }, [session?.user?.id, FREE_SPIN_COOLDOWN, router]);
+
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      setUserID(session.user.id);
+      getUserById();
+    }
+  }, [session?.user?.id, getUserById]);
+
+
+  
 
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     setHistoryLoading(true);
     try {
       const activityName = activityFilter === "all" ? "" : activityFilter;
@@ -225,13 +236,13 @@ const AppDashboard3 = () => {
     } finally {
       setHistoryLoading(false);
     }
-  };
+  }, [activityFilter, activePage, session?.user?.id, router]);
 
   useEffect(() => {
     if (session?.user?.id) {
       fetchActivities();
     }
-  }, [activePage, activityFilter]);
+  }, [fetchActivities, session?.user?.id]);
 
   useEffect(() => {
     if (session?.user?.id) {

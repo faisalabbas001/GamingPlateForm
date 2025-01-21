@@ -14,6 +14,8 @@ import {
 import { Label } from "../components/ui/label";
 import { useTranslation } from "../context/TranslationProvider";
 import axios from "axios";
+import { AxiosError } from "axios";
+
 // interface QueryParams {
 //     token?: string | string[];
 //   }
@@ -32,7 +34,7 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     // Access query parameters using router.query
     setTokenValue(searchParams.get("token") || ""); 
-  }, []); // Use this hook when router.query changes
+  }, [searchParams]); // Use this hook when router.query changes
  
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,10 +59,14 @@ export default function ResetPasswordPage() {
       });
       setMessage(t("Password reset successfully"));
       router.push("/login"); // Redirect to login after successful reset
-    } catch (err: any) {
-      setError(
-        err.response?.data?.error || t("An error occurred. Please try again.")
-      );
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.error || t("An error occurred. Please try again.")
+        );
+      } else {
+        setError(t("An unexpected error occurred."));
+      }
     } finally {
       setLoading(false);
     }
