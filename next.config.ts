@@ -10,7 +10,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  distDir: 'build', // Moved to the correct position
+  // distDir: 'build', // Moved to the correct position
 };
 
 export default nextConfig;
