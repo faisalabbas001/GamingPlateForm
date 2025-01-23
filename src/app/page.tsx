@@ -26,6 +26,16 @@ export default function HomePage() {
   const [rotationAngle, setRotationAngle] = useState(0);
   // const [maintenanceMode, setMaintenanceMode] = useState<boolean>(false);
 
+
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     // Safe client-side code
+  //   }
+  // }, []);
+
+  
+
+
   useEffect(() => {
     const interval = setInterval(() => {
       setRotationAngle((prev) => (prev + 30) % 360);

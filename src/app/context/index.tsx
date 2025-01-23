@@ -10,9 +10,9 @@ import { projectId, wagmiAdapter } from '../config';
 // Set up queryClient
 const queryClient = new QueryClient();
 
-if (!projectId) {
-  throw new Error('Project ID is not defined');
-}
+// if (!projectId) {
+//   throw new Error('Project ID is not defined');
+// }
 
 // Set up metadata
 const metadata = {
@@ -25,7 +25,7 @@ const metadata = {
 // Create the modal
 const modal = createAppKit({
   adapters: [wagmiAdapter],
-  projectId,
+  projectId:projectId as string,
   networks: [sepolia],
   defaultNetwork: sepolia,
   metadata,
