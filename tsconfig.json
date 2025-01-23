@@ -29,11 +29,14 @@
     "target": "ES2017"
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "src/app/locales/es.tx", "src/app/api/auth/[...nextauth]/route.js"  ],
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "src/app/api/auth/[...nextauth]/route.js",
+    "src/app/locales/es.tx",
+    "build/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

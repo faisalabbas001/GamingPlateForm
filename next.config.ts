@@ -1,5 +1,4 @@
 const nextConfig = {
-
   images: {
     remotePatterns: [
       {
@@ -11,6 +10,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  distDir: 'build', // Moved to the correct position
 };
 
 export default nextConfig;
