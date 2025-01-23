@@ -27,11 +27,11 @@ export default function HomePage() {
   // const [maintenanceMode, setMaintenanceMode] = useState<boolean>(false);
 
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     // Safe client-side code
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Safe client-side code
+    }
+  }, []);
 
   
 

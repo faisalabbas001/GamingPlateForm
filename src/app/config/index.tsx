@@ -1,3 +1,5 @@
+
+"use client"
 import { cookieStorage, createStorage } from '@wagmi/core'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import {  sepolia } from '@reown/appkit/networks'

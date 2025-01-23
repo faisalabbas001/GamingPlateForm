@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import {
   Card,
@@ -119,6 +120,15 @@ const FunTab: React.FC<FunTabProps> = ({
   const handlePrevPage = () => {
     setActivePage(activePage - 1);
   };
+
+
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+
+    setDate(new Date().toISOString());
+
+ }, []);
 
 
   return (
@@ -301,7 +311,7 @@ const FunTab: React.FC<FunTabProps> = ({
                   onClick={() => claimFreeSpin()}
                   disabled={
                     isSpinning ||
-                    (nextFreeSpinTime !== null && Date.now() < nextFreeSpinTime)
+                    (nextFreeSpinTime !== null && Number(date)< nextFreeSpinTime)
                   }
                   className="w-full md:w-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-sm md:text-lg px-4 py-2 md:px-8 md:py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 >

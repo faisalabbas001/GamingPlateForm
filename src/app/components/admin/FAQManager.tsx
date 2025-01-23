@@ -1,4 +1,5 @@
-import { useState } from "react";
+"use client"
+import { useState,useEffect } from "react";
 import {
   DragDropContext,
   Droppable,
@@ -56,11 +57,18 @@ export default function FAQManager() {
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
   const [newQuestion, setNewQuestion] = useState("");
   const [newAnswer, setNewAnswer] = useState("");
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+
+    setDate(new Date().toISOString());
+
+ }, []);
  
   const handleAddFaq = () => {
     if (newQuestion && newAnswer) {
       const newFaq: FAQ = {
-        id: Date.now().toString(),
+        id: date?.toString(),
         question: newQuestion,
         answer: newAnswer,
       };

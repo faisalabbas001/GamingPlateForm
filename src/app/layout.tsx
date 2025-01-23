@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ClientSessionProvider from "./components/ClientSessionProvider";
-import { TranslationProvider } from "./context/TranslationProvider";
-import NavbarCom from "./components/NavbarCom";
-import FooterComp from "./components/FooterComp";
-import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 // import { MaintenanceProvider } from "@/app/context/MaintenanceProvider";
-import ContextProvider from "./context";
-import { headers } from "next/headers";
+
+import LayoutClient from "./LayoutClient";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,26 +28,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookies = (await headers()).get('cookie')
+  
 
   return (
-    <html lang="en">
+    <html lang="en" >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-b from-gray-900 to-purple-900 text-white`}
       >
-        <ContextProvider cookies={cookies}>
-          <TranslationProvider>
-            <ClientSessionProvider>
-              {/* <MaintenanceProvider> */}
-                <NavbarCom />
+        <LayoutClient>
                 {children}
-
-                <FooterComp />
-              {/* </MaintenanceProvider> */}
-            </ClientSessionProvider>
-          </TranslationProvider>
-          <ToastContainer />
-        </ContextProvider>
+              </LayoutClient>
       </body>
     </html>
   );

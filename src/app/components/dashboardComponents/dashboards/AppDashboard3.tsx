@@ -88,6 +88,23 @@ const AppDashboard3 = () => {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [isPurchaseLoading, setIsPurchaseLoading] = useState(false);
 
+
+  const [randomNumber, setRandomNumber] = 
+  useState(0);
+
+useEffect(() => {
+  setRandomNumber(Math.random());
+}, []);
+
+
+const [date, setDate] = useState("");
+
+  useEffect(() => {
+
+    setDate(new Date().toISOString());
+
+ }, []);
+
   const fetchSettings = async () => {
     try {
       const response = await axios.get("/api/setting");
@@ -408,7 +425,7 @@ const AppDashboard3 = () => {
 
       // Add small random offset for natural feel
       const randomOffset =
-        Math.random() * (segmentAngle * 0.2) - segmentAngle * 0.1;
+      randomNumber * (segmentAngle * 0.2) - segmentAngle * 0.1;
 
       // Start the spin animation
       setTimeout(() => {
@@ -479,7 +496,7 @@ const AppDashboard3 = () => {
       return;
     }
 
-    if (Date.now() >= nextFreeSpinTime) {
+    if (Number(date) >= nextFreeSpinTime) {
       spinWheel(true);
     } else {
       toast.info(

@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState,useCallback } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../ui/card";
 import { ScrollArea } from "../../ui/scroll-area";
