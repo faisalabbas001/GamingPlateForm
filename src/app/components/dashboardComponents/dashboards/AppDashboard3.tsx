@@ -522,6 +522,12 @@ const [date, setDate] = useState("");
     }
   };
 
+
+
+  const updateCredits = (newCredits: number) => {
+    setCredits(newCredits);
+  };
+
   return (
     <>
       <div className="min-h-screen ">
@@ -625,7 +631,7 @@ const [date, setDate] = useState("");
               />
             </TabsContent>
             <TabsContent value="rewards">
-              <RewardTab t={t} credits={credits || 0} userId={userId} />
+              <RewardTab t={t} credits={credits || 0}   userId={userId} updateCredits={updateCredits} />
             </TabsContent>
             <TabsContent value="referral">
               <ReferralTab t={t} referralLink={referralLink} userId={userId} />

@@ -56,7 +56,7 @@ console.log("dataaa::userId, rewardId, walletAddress, network, redeemed")
       );
     }
     
-    user.redeemedRewards += redeemed; // Increase the redeemed rewards value
+    user.credits -= reward.cost;
     await user.save();
 
     // Create a new reward claim with status 'pending'
@@ -125,7 +125,9 @@ const updateRewardStatus = async (request: NextRequest) => {
       reward.walletAddress,
     );
     // TODO: here add wallet transcation logic
-    
+      // Deduct reward cost from user's credits
+      // user.credits -= reward.cost;
+      // await user.save();
     // Process acceptance or rejection
     if (action === true) {
       // Accepted
@@ -137,9 +139,7 @@ const updateRewardStatus = async (request: NextRequest) => {
         );
       }
 
-      // Deduct reward cost from user's credits
-      user.credits -= reward.cost;
-      await user.save();
+    
 
       // Update reward status to Accepted
       reward.status = "Accepted";
@@ -168,6 +168,11 @@ const updateRewardStatus = async (request: NextRequest) => {
       // Update reward status to Rejected
       reward.status = "Rejected";
       await reward.save();
+
+      // refund the creadit when the admin has been reject the 
+      // Refund credits to user
+  user.credits += reward.cost;
+  await user.save();
 
       return NextResponse.json({ message: "Reward rejected." });
     } else {

@@ -7,6 +7,9 @@ const RewardAdminSchema = new mongoose.Schema(
     cost: { type: Number, required: true },
     claimed: { type: Number, default: 0 },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    image: { type: String, required: true }, 
+    network: { type: String, required: true }, 
+ 
   },
   { timestamps: true }
 ); // Enable timestamps

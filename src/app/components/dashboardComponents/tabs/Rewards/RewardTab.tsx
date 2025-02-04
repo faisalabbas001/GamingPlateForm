@@ -43,12 +43,14 @@ interface RewardsType {
   name: string;
   cost: number;
   claimed: number;
+  image:string
 }
 
 interface RewardTabProps {
   t: (key: string) => string;
   credits: number;
   userId: string;
+  updateCredits: (newCredits: number) => void;
 }
 
 interface RedemptionTypes {
@@ -68,7 +70,7 @@ interface SelectedRewardType {
   claimed: number;
 }
 
-const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
+const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId, updateCredits }) => {
   const [apiRewards, setApiRewards] = useState<RewardsType[] | null>([]);
   const [selectedReward, setSelectedReward] =
     useState<SelectedRewardType | null>(null);
@@ -85,6 +87,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const router = useRouter();
+  const [user, setUser] = useState<{ credits: number }>({ credits: 0 });
 
   
 
@@ -206,7 +209,10 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
           network: selectedNetwork,
           redeemed,
         });
+        
         if (response) {
+          const newCredits = credits - selectedReward.cost;
+          updateCredits(newCredits);
           toast.success(
             `${t("You have redeemed")} ${selectedReward.name} ${t("by")} ${
               selectedReward.cost
@@ -229,6 +235,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
               },
             }
           );
+
           closeRedemptionOverlay();
           fetchExchangeHistoryByUserId();
         }
@@ -322,16 +329,31 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
                   >
                     <div className="flex-shrink-0 h-32   md:h-40 relative">
                       <Image
-                        src={
-                          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-bX8jcXTis6IPPblUFvDS9MZe8pFBAY.png"
-                        }
+                        src={reward.image}
+                          // "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-bX8jcXTis6IPPblUFvDS9MZe8pFBAY.png"
+                        
+                        
                         alt={reward.name}
                         layout="fill"
-                        objectFit="cover"
-                        className="p-2 bg-cover"
+                        objectFit="contain"
+                        className="p-2 bg-contain"
                         loading="lazy"
                       />
                     </div>
+
+
+{/* <div className="flex-shrink-0 h-32 md:h-40 relative">
+  <Image
+    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-bX8jcXTis6IPPblUFvDS9MZe8pFBAY.png"
+    alt={reward.name}
+    layout="intrinsic" 
+    width={200}  
+    height={120}  
+    objectFit="contain"  
+    className="p-2 w-full"
+    loading="lazy"
+  />
+</div> */}
                     <div className="flex flex-col flex-grow p-4">
                       <CardTitle className="text-base md:text-lg font-bold text-purple-400 mb-2">
                         {reward.name}
@@ -384,7 +406,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
               </SelectContent>
             </Select>
           </div>
-          <ScrollArea className="h-[300px] w-full rounded-xl border">
+          <ScrollArea className="h-full w-full rounded-xl border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -542,21 +564,21 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId }) => {
                   className="flex flex-wrap space-x-4 mt-2"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="BSC" id="BSC" />
-                    <Label htmlFor="BSC" className="text-white">
-                      BSC
+                    <RadioGroupItem value="Ethereum" id="Ethereum" />
+                    <Label htmlFor="Ethereum" className="text-white">
+                    Ethereum
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="TRC20" id="TRC20" />
-                    <Label htmlFor="TRC20" className="text-white">
-                      TRC20
+                    <RadioGroupItem value="Polygon" id="Polygon" />
+                    <Label htmlFor="Polygon" className="text-white">
+                    Polygon
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="ETH" id="ETH" />
-                    <Label htmlFor="ETH" className="text-white">
-                      ETH
+                    <RadioGroupItem value="Solana" id="Solana" />
+                    <Label htmlFor="Solana" className="text-white">
+                    Solana
                     </Label>
                   </div>
                 </RadioGroup>

@@ -133,7 +133,7 @@ const FunTab: React.FC<FunTabProps> = ({
 
   return (
     <>
-      <div className="space-y-8">
+      <div className="">
         {/* {isSettingsLoading ? (
           <Loader height="50vh" />
         ) : (
@@ -330,12 +330,12 @@ const FunTab: React.FC<FunTabProps> = ({
 
         {/* Custom Modal */}
         {showResultModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="fixed inset-0  z-50 flex items-center justify-center">
             {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+              className="absolute inset-0 bg-black bg-opacity-50   backdrop-blur-md"
               onClick={handleCloseModal}
-            />
+            /> 
 
             {/* Modal Content */}
             <div className="relative bg-gray-800 border-2 border-purple-500 rounded-xl p-6 w-[90%] max-w-md transform transition-all">
@@ -436,9 +436,9 @@ const FunTab: React.FC<FunTabProps> = ({
                 </SelectContent>
               </Select>
             </div>
-            <ScrollArea className="h-[300px] w-full rounded-xl border">
+            <ScrollArea className="h-full w-full rounded-xl border">
               <Table>
-                <TableHeader>
+                <TableHeader className="sticky top-0  z-10">
                   <TableRow>
                     <TableHead className="text-purple-400">
                       {t("Activity")}

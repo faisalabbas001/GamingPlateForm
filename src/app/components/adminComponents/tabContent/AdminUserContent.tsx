@@ -409,7 +409,7 @@ const AdminUserContent = () => {
                   </Button> */}
               </div>
               <div className="overflow-x-auto">  
-      <ScrollArea className="h-[300px] w-full rounded-xl border">  
+      <ScrollArea className="h-full w-full rounded-xl border">  
         <Table>  
         <TableHeader>
   <TableRow>

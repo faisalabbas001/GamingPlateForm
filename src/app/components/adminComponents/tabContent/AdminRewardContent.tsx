@@ -21,6 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../../components/ui/dialog";
+import { PiCopyLight } from "react-icons/pi";
 import { Badge } from "../../../components/ui/badge";
 import { Separator } from "../../../components/ui/separator";
 import { Label } from "../../ui/label";
@@ -39,6 +40,8 @@ interface RewardsType {
   cost: number;
   claimed: number;
   redeemed: number;
+  image:string,
+  network:string
 }
 
 interface UserType {
@@ -55,6 +58,7 @@ interface RedemptionsType {
   status: string;
   user: UserType;
   walletAddress: string;
+  network:String
 }
 
 const AdminRewardContent = () => {
@@ -155,6 +159,9 @@ const AdminRewardContent = () => {
     name: selectedReward?.name || "",
     cost: selectedReward?.cost || 0,
     redeemed: selectedReward?.redeemed || 0,
+    image:selectedReward?.image || "",
+    network:selectedReward?.network || "",
+      
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -208,7 +215,12 @@ const AdminRewardContent = () => {
           const response = await axios.post("/api/reward", {
             ...values,
             userId,
+           
+            
           });
+
+
+          console.log("Response rewards:", response);
           //   console.log("res", response);
           if (response) {
             getAllRewards();
@@ -245,6 +257,8 @@ const AdminRewardContent = () => {
       name: selectedReward?.name || "",
       cost: selectedReward?.cost || 0,
       redeemed: selectedReward?.claimed || 0,
+      image:selectedReward?.image || "",
+      network:selectedReward?.network || "",
     });
   }, [selectedReward,setValues]);
 
@@ -372,6 +386,52 @@ const AdminRewardContent = () => {
     return <Loader height={"80vh"} />;
   }
 
+
+  const maskWallet = (wallet: string ) => {
+    if (wallet?.length < 42) return wallet;
+    return `${wallet.slice(0, 4)}...${wallet.slice(-5)}`;
+  };
+
+  
+
+
+  const handleCopy = (text:any) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success("Wallet address copied!");
+      })
+      .catch((err) => {
+      
+        toast.error("Failed to copy address");
+      });
+  };
+
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+  
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result as string | null; 
+  
+        if (base64String) {
+          setValues((prev) => ({
+            ...prev,
+            image: base64String, 
+          }));
+        } else {
+          console.error("Error: FileReader result is null");
+        }
+      };
+      reader.onerror = (error) => console.error("Error converting image:", error);
+    }
+  };
+  
+  
+  
+
   return (
     <>
       <Card className="bg-gray-800 bg-opacity-50 border-purple-500 border rounded-xl backdrop-blur-md">
@@ -406,6 +466,12 @@ const AdminRewardContent = () => {
                       {t("Redeemed")}
                     </TableHead>
                     <TableHead className="text-purple-400">
+                      {t("Image")}
+                    </TableHead>
+                    <TableHead className="text-purple-400">
+                      {t("Network")}
+                    </TableHead>
+                    <TableHead className="text-purple-400">
                       {t("Actions")}
                     </TableHead>
                   </TableRow>
@@ -420,6 +486,15 @@ const AdminRewardContent = () => {
                         <TableCell>{reward.name}</TableCell>
                         <TableCell>{reward.cost}</TableCell>
                         <TableCell>{reward.claimed}</TableCell>
+                        <TableCell>
+  {reward.image ? (
+    <img src={reward.image} alt={reward.name} className="w-16 h-16 object-cover" />
+  ) : (
+    t("No image available")
+  )}
+</TableCell>
+
+                        <TableCell>{reward.network}</TableCell>
                         <TableCell>
                           <Button
                             variant="ghost"
@@ -471,6 +546,8 @@ const AdminRewardContent = () => {
                     <TableHead className="text-purple-400">
                       {t("Redeemed USD")}
                     </TableHead>
+                    <TableHead className="text-purple-400">{t("Wallet Address")}</TableHead>
+                    <TableHead className="text-purple-400">{t("Network")}</TableHead>
                     <TableHead className="text-purple-400">
                       {t("Date")}
                     </TableHead>
@@ -492,10 +569,20 @@ const AdminRewardContent = () => {
                         <TableCell>{redemption?.user?.username}</TableCell>
                         <TableCell>{redemption.name}</TableCell>
                         <TableCell>{redemption.cost}</TableCell>
+               
+                       
+                      
                         <TableCell>
                           {"$"}
                           {redemption.redeemed}
                         </TableCell>
+                        <TableCell
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={() => handleCopy(redemption.walletAddress)}
+              >
+                {maskWallet(redemption.walletAddress)} <PiCopyLight />
+              </TableCell>
+              <TableCell>{redemption?.network}</TableCell>
                         <TableCell>
                           {moment(redemption.updatedAt).format(
                             "MM/DD/YYYY, h:mm:ss A"
@@ -514,6 +601,8 @@ const AdminRewardContent = () => {
                             {redemption.status}
                           </Badge>
                         </TableCell>
+                     
+                        
                         <TableCell>
                           {redemption?.status === "Pending" && (
                             <>
@@ -591,92 +680,127 @@ const AdminRewardContent = () => {
           </CardFooter>
       </Card>
 
-      {/* add and edit reward model  */}
       <Dialog open={isRewardDialogOpen} onOpenChange={setIsRewardDialogOpen}>
-        <DialogContent className="bg-gray-800 bg-opacity-90 text-white border border-purple-500 rounded-xl backdrop-blur-md max-w-md mx-auto">
-          <DialogHeader>
-            <DialogTitle className="text-xl md:text-2xl font-bold  text-purple-400">
-              {isEditMode ? t("Edit Reward") : t("Add Reward")}
-            </DialogTitle>
-          </DialogHeader>
-          {selectedReward && (
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="space-y-2">
-                <Label htmlFor="name">{t("Name")}</Label>
-                <Input
-                  id="name"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={`bg-gray-700 rounded-[7px] bg-opacity-50 text-white ${
-                    touched.name && errors.name
-                      ? "border-red-500"
-                      : "border-purple-500"
-                  }`}
-                />
-                {touched.name && errors.name && (
-                  <p className="text-sm text-red-600">
-                    {errors.name as string}
-                  </p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="cost">
-                  {t("Cost")} ({t("Credits")})
-                </Label>
-                <Input
-                  id="cost"
-                  type="number"
-                  value={values.cost}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={`bg-gray-700 rounded-[7px] bg-opacity-50 text-white ${
-                    touched.cost && errors.cost
-                      ? "border-red-500"
-                      : "border-purple-500"
-                  }`}
-                />
-                {touched.cost && errors.cost && (
-                  <p className="text-sm text-red-600">
-                    {errors.cost as string}
-                  </p>
-                )}
-              </div>
-              {/* TODO: Redeemed input add here */}
-              <div className="space-y-2">
-                <Label htmlFor="redeemed">
-                  {t("Redeemed")} ({t("Credits")})
-                </Label>
-                <Input
-                  id="redeemed"
-                  type="number"
-                  value={values.redeemed}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={`bg-gray-700 rounded-[7px] bg-opacity-50 text-white ${
-                    touched.redeemed && errors.redeemed
-                      ? "border-red-500"
-                      : "border-purple-500"
-                  }`}
-                />
-                {touched.redeemed && errors.redeemed && (
-                  <p className="text-sm text-red-600">
-                    {errors.redeemed as string}
-                  </p>
-                )}
-              </div>
-              {/* TODO: Redeemed input add here */}
-              <Button
-                type="submit"
-                className="w-full bg-purple-600 hover:bg-purple-700"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? <CircleLoader /> : t("Save Changes")}
-              </Button>
-            </form>
-          )}
-        </DialogContent>
-      </Dialog>
+  <DialogContent className="bg-gray-800 bg-opacity-90 text-white border border-purple-500 rounded-xl backdrop-blur-md max-w-md mx-auto">
+    <DialogHeader>
+      <DialogTitle className="text-xl md:text-2xl font-bold text-purple-400">
+        {isEditMode ? t("Edit Reward") : t("Add Reward")}
+      </DialogTitle>
+    </DialogHeader>
+
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      {/* Name Field */}
+      <div className="space-y-2">
+        <Label htmlFor="name">{t("Name")}</Label>
+        <Input
+          id="name"
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`bg-gray-700 rounded-[7px] bg-opacity-50 text-white ${
+            touched.name && errors.name ? "border-red-500" : "border-purple-500"
+          }`}
+        />
+        {touched.name && errors.name && (
+          <p className="text-sm text-red-600">{errors.name as string}</p>
+        )}
+      </div>
+
+      {/* Cost Field */}
+      <div className="space-y-2">
+        <Label htmlFor="cost">{t("Cost")} ({t("Credits")})</Label>
+        <Input
+          id="cost"
+          type="number"
+          value={values.cost}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`bg-gray-700 rounded-[7px] bg-opacity-50 text-white ${
+            touched.cost && errors.cost ? "border-red-500" : "border-purple-500"
+          }`}
+        />
+        {touched.cost && errors.cost && (
+          <p className="text-sm text-red-600">{errors.cost as string}</p>
+        )}
+      </div>
+
+      {/* Redeemed Field */}
+      <div className="space-y-2">
+        <Label htmlFor="redeemed">{t("Redeemed")} ({t("Credits")})</Label>
+        <Input
+          id="redeemed"
+          type="number"
+          value={values.redeemed}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`bg-gray-700 rounded-[7px] bg-opacity-50 text-white ${
+            touched.redeemed && errors.redeemed ? "border-red-500" : "border-purple-500"
+          }`}
+        />
+        {touched.redeemed && errors.redeemed && (
+          <p className="text-sm text-red-600">{errors.redeemed as string}</p>
+        )}
+      </div>
+
+      {/* Image Upload Field */}
+      <div className="space-y-2">
+        <Label htmlFor="image">{t("Image")}</Label>
+        <Input
+          id="image"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="bg-gray-700 rounded-[7px] bg-opacity-50 text-white border-purple-500"
+        />
+      </div>
+
+
+        {/* Show the current image if in edit mode */}
+{isEditMode && values.image && (
+  <div className="mt-2">
+    <p className="text-gray-400">{t("Current Image")}</p>
+    <img
+      src={values.image} // ✅ Show stored image
+      alt="Uploaded preview"
+      className="w-32 h-32 object-cover rounded-md"
+    />
+  </div>
+)}
+
+
+
+
+
+      {/* Network Selection */}
+      <div className="space-y-2">
+        <Label htmlFor="network">{t("Select Network")}</Label>
+        <select
+          id="network"
+          name="network"
+          value={values.network || ""} // Ensure the value is never undefined
+          onChange={handleChange}
+          className="bg-gray-700 w-full rounded-[7px] p-3 bg-opacity-50 text-white border-purple-500"
+        >
+          <option value="">{t("Select Network")}</option>
+          <option value="Ethereum">Ethereum</option>
+          <option value="Polygon">Polygon</option>
+          <option value="Solana">Solana</option>
+        </select>
+      </div>
+
+      {/* Submit Button */}
+      <Button
+        type="submit"
+        className="w-full bg-purple-600 hover:bg-purple-700"
+        disabled={!values.network || isSubmitting}
+      >
+        {isSubmitting ? <CircleLoader /> : t("Save Changes")}
+      </Button>
+    </form>
+  </DialogContent>
+</Dialog>
+
+
     </>
   );
 };

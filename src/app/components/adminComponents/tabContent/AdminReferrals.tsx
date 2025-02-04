@@ -332,7 +332,7 @@ const AdminReferrals: React.FC<AdminReferralsProps> = ({ t, userId }) => {
               >
                 {isSaving ? <CircleLoader /> : t("Save Settings")}
               </Button>
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label>{t("Referral Levels")}</Label>
                 <div className="overflow-x-auto">
                   <ScrollArea className="h-[370px] w-full rounded-xl border">
@@ -393,7 +393,7 @@ const AdminReferrals: React.FC<AdminReferralsProps> = ({ t, userId }) => {
                     </Table>
                   </ScrollArea>
                 </div>
-              </div>
+              </div> */}
 
               <div className="overflow-x-auto">
                 <ScrollArea className="h-[300px] w-full rounded-xl border">

@@ -19,7 +19,7 @@ const getActivitiesbyUserId = async (request: NextRequest) => {
   const userId = request.nextUrl.searchParams.get("userId");
   const activityname = request.nextUrl.searchParams.get("activityName");
   const page = parseInt(request.nextUrl.searchParams.get("page") || "1");
-  const limit = 10;
+  const limit = 5;
 
   if (!userId) {
     return NextResponse.json(

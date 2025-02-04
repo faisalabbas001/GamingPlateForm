@@ -510,7 +510,7 @@ console.log("cehcking for data")
                 )}
               </div>
             </div>
-            <ScrollArea className="h-[300px] w-full rounded-xl border">
+            <ScrollArea className="h-full w-full rounded-xl border">
               <Table>
                 <TableHeader>
                   <TableRow>

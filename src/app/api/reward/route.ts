@@ -3,12 +3,14 @@ import { mongooseConnect } from "@/lib/dbConnect";
 import { User } from "@/model/User";
 import { RewardAdmin } from "@/model/RewardAdmin";
 // import { Reward } from "@/model/Reward";
+ 
+
 
 // Function to create a reward
 const createReward = async (request: NextRequest) => {
   await mongooseConnect();
-  const { name, cost, userId ,  redeemed} = await request.json();
-  console.log("checking the rewards is that here",cost, userId,name,userId,userId)
+  const { name, cost, userId ,  redeemed,image, network} = await request.json();
+  console.log("checking the rewards is that here",cost, userId,name,userId,userId,network)
 
   if (!name || !userId || typeof cost !== "number") {
     return NextResponse.json(
@@ -32,8 +34,9 @@ const createReward = async (request: NextRequest) => {
       );
     }
 
-    const reward = new RewardAdmin({ name, cost , claimed:redeemed });
+    const reward = new RewardAdmin({ name, cost , claimed:redeemed,userId,image, network });
     await reward.save(); // Save the new reward
+    console.log("Saved reward final :", reward);
     return NextResponse.json(reward, { status: 201 }); // Return the created reward
   } catch (error) {
     console.error("Error creating reward:", error);
@@ -103,7 +106,7 @@ const handleGetRequest = async (request: NextRequest) => {
 const updateReward = async (request: NextRequest) => {
   await mongooseConnect();
 
-  const { name, cost, userId , redeemed } = await request.json();
+  const { name, cost, userId , redeemed, image, network } = await request.json();
 
   // const data = await request.json();
   const id = request.nextUrl.searchParams.get("id");
@@ -131,7 +134,7 @@ const updateReward = async (request: NextRequest) => {
 
     const updatedReward = await RewardAdmin.findByIdAndUpdate(
       id,
-      { name, cost, user: userId , claimed:redeemed },
+      { name, cost, user: userId , claimed:redeemed,image,network },
       {
         new: true,
         runValidators: true,
