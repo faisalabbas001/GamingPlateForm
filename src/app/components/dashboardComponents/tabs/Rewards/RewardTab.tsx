@@ -320,7 +320,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId, updateCredits
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-4">
               {apiRewards && apiRewards.length > 0 ? (
                 apiRewards?.map((reward, index) => (
                   <Card
@@ -355,7 +355,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ t, credits, userId, updateCredits
   />
 </div> */}
                     <div className="flex flex-col flex-grow p-4">
-                      <CardTitle className="text-base md:text-lg font-bold text-purple-400 mb-2">
+                      <CardTitle className="text-xs sm:text-lg font-bold text-purple-400 break-words">
                         {reward.name}
                       </CardTitle>
                       <p className="text-white mb-0 flex-grow text-sm md:text-base">
